@@ -1,0 +1,11 @@
+{
+  "name": "hamPath",
+  "description": "A library for generating random looking Hamiltonian paths on a grid",
+  "author": "John Adams <jadams440@gmail.com>",
+  "license": "WTFPL",
+  "version": "0.0.1",
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-contrib-uglify": "^0.5.1"
+  }
+}

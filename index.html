@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>HamPath</title>
+</head>
+<body>
+<script src="hampath.js"></script>
+<script>
+    var pathOpts = {
+        width : 4,
+        height : 8
+    };
+    var path = hampath.generate(pathOpts);
+
+    var drawOpts = {
+        width : 64,
+        color : 'rgba(200, 0, 0, 1)',
+        background : 'rgba(255, 255, 255, 1)',
+        thickness : 0.6
+    };
+    var canvas = hampath.draw(path, drawOpts);
+    document.body.appendChild(canvas);
+</script>
+</body>
+</html>
