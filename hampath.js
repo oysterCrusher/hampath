@@ -153,11 +153,18 @@
     /* Handy function for drawing the path to a canvas */
     function draw(path, opts) {
         opts = opts || {};
-        var cw = opts.width || 30;
+        var cw = opts.width || 32;
         var fg = opts.color || 'rgba(0,0,0,1)';
         var bg = opts.background || 'rgba(0,0,0,0)';
+        var tc = opts.tails || 'rgba(200,0,0,1)';
         var th = opts.thickness || 0.5;
+
         var cellSize = cw / path.width;
+
+        var d = path.data;
+        var dl = d.length - 1;
+
+        th = Math.round(cw / path.width * th);
 
         var can = document.createElement('canvas');
         can.width = cw;
@@ -168,13 +175,17 @@
         ctx.fillRect(0, 0, can.width, can.height);
 
         ctx.strokeStyle = fg;
-        ctx.lineWidth = Math.round(cw / path.width * th);
+        ctx.lineWidth = th;
         ctx.beginPath();
-        ctx.moveTo((path.data[0][0] + 0.5) * cellSize, (path.data[0][1] + 0.5) * cellSize);
-        for (var i = 0; i < path.data.length; i++) {
-            ctx.lineTo((path.data[i][0] + 0.5) * cellSize, (path.data[i][1] + 0.5) * cellSize);
+        ctx.moveTo((d[0][0] + 0.5) * cellSize, (d[0][1] + 0.5) * cellSize);
+        for (var i = 0; i < d.length; i++) {
+            ctx.lineTo((d[i][0] + 0.5) * cellSize, (d[i][1] + 0.5) * cellSize);
         }
         ctx.stroke();
+
+        ctx.fillStyle = tc;
+        ctx.fillRect((d[0][0] + 0.5) * cellSize - th / 2, (d[0][1] + 0.5) * cellSize - th / 2, th, th);
+        ctx.fillRect((d[dl][0] + 0.5) * cellSize - th / 2, (d[dl][1] + 0.5) * cellSize - th / 2, th, th);
 
         return can;
     }
